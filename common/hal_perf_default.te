@@ -39,7 +39,7 @@ binder_call(hal_perf_client, hal_perf_server)
 add_hwservice(hal_perf_server, hal_perf_hwservice)
 allow hal_perf_client hal_perf_hwservice:hwservice_manager find;
 
-allow hal_perf cgroup:file r_file_perms;
+allow hal_perf_server cgroup:file r_file_perms;
 allow hal_perf_default proc:file rw_file_perms;
 allow hal_perf device_latency:chr_file rw_file_perms;
 allow hal_perf_default mpctl_data_file:dir rw_dir_perms;
@@ -55,17 +55,17 @@ set_prop(hal_perf_default, freq_prop)
 allow hal_perf proc_meminfo:file r_file_perms;
 
 #Access to /proc/pid of other apps
-r_dir_file(hal_perf, appdomain);
+r_dir_file(hal_perf_server, appdomain);
 dontaudit hal_perf domain:dir r_dir_perms;
-allow hal_perf appdomain:process sigkill;
-allow hal_perf_default self:capability {dac_override sys_resource kill};
+allow hal_perf_server appdomain:process sigkill;
+allow hal_perf_default self:capability { sys_resource kill};
 
 #Acess to kgsl memory /sys/class/kgsl/kgsl/proc/<pid>/kernel &
 #Acess to ion  memory /sys/class/kgsl/kgsl/proc/<pid>/ion
 allow hal_perf sysfs_kgsl_proc:dir r_dir_perms;
 allow hal_perf sysfs_kgsl_proc:file r_file_perms;
 
-allow hal_perf {
+allow hal_perf_server {
     sysfs_devices_system_cpu
     sysfs_mpdecision
     sysfs_devfreq
@@ -82,7 +82,7 @@ allow hal_perf {
     sysfs_process_reclaim
 }:dir r_dir_perms;
 
-allow hal_perf {
+allow hal_perf_server {
     sysfs_devices_system_cpu
     sysfs_mpdecision
     sysfs_kgsl
@@ -98,7 +98,7 @@ allow hal_perf {
     sysfs_process_reclaim
 }:file rw_file_perms;
 
-allow hal_perf {
+allow hal_perf_server {
     sysfs_devfreq
     sysfs_mmc_host
     sysfs_scsi_host

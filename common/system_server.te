@@ -163,12 +163,12 @@ allow system_server sysfs_graphics:file rw_file_perms;
 
 # timerslack_ns
 allow system_server { location_app system_app } :file write;
-allow system_server opengles_prop:file r_file_perms;
-allow system_server graphics_vulkan_prop:file r_file_perms;
+get_prop(system_server, opengles_prop)
+get_prop(system_server, graphics_vulkan_prop)
 
-allow system_server hwui_prop:file r_file_perms;
-allow system_server bservice_prop:file r_file_perms;
-allow system_server reschedule_service_prop:file r_file_perms;
+get_prop(system_server, hwui_prop)
+get_prop(system_server, bservice_prop)
+get_prop(system_server, reschedule_service_prop)
 allow system_server appdomain:file w_file_perms;
 
 get_prop(system_server, vendor_mpctl_prop)

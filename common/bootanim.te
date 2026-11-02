@@ -28,7 +28,7 @@
 # allow bootanim to binder mediaserver
 binder_call(bootanim, mediaserver);
 allow bootanim mediaserver_service:service_manager find;
-allow bootanim boot_animation_prop:file r_file_perms;
-allow bootanim debug_gralloc_prop:file r_file_perms;
+get_prop(bootanim, boot_animation_prop)
+get_prop(bootanim, debug_gralloc_prop)
 set_prop(bootanim, qemu_gles_prop)
 userdebug_or_eng(`allow bootanim self:process execmem;')

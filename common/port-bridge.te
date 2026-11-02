@@ -12,7 +12,7 @@ userdebug_or_eng(`
 allow port-bridge port-bridge:netlink_kobject_uevent_socket { create bind read };
 
 # Allow process capabilities
-allow port-bridge port-bridge:capability dac_override;
+# Use resource ownership/groups instead of broad DAC bypass.
 
 allow port-bridge {
     # Allow operations on mhi transport
