@@ -41,8 +41,8 @@ allow qti_init_shell fm_data_file: file create_file_perms;
 allow qti_init_shell gpu_device:chr_file getattr;
 
 # for insmod of iris ko, this is needed.
-# dac_read/override is needed for scripts to do chown/mkdir which is
-# needed by most of the services
+# Quark post-boot uses root/system ownership and explicit CHOWN/FOWNER,
+# not generic DAC bypass
 # fowner and fsetid are needed for chmod display nodes.
 allow qti_init_shell self:capability {
     sys_module
@@ -50,8 +50,8 @@ allow qti_init_shell self:capability {
     chown
     fowner
     fsetid
-    dac_override
-    dac_read_search
+
+
     sys_admin
 };
 
@@ -221,7 +221,7 @@ allow qti_init_shell proc:file r_file_perms;
 r_dir_file(qti_init_shell, rootfs)
 allow qti_init_shell sysfs:file r_file_perms;
 
-allow qti_init_shell rmnet_mux_prop:file r_file_perms;
+get_prop(qti_init_shell, rmnet_mux_prop)
 
 r_dir_file(qti_init_shell, sysfs_devfreq)
 allow qti_init_shell sysfs_devfreq:file w_file_perms;
@@ -259,7 +259,7 @@ set_prop(qti_init_shell, mmi_prop);
 allow qti_init_shell proc_meminfo:file r_file_perms;
 
 allow qti_init_shell sysfs_msm_power:file rw_file_perms;
-allow qti_init_shell  sysfs_devices_system_cpu:dir w_file_perms;
+allow qti_init_shell sysfs_devices_system_cpu:dir { open append lock map };
 allow qti_init_shell  sysfs_devices_system_cpu:file rw_file_perms;
 
 allow qti_init_shell sysfs_usb_mtp_device:dir r_dir_perms;
@@ -267,4 +267,4 @@ allow qti_init_shell sysfs_usb_mtp_device:file rw_file_perms;
 
 # For IO Cgroups
 allow qti_init_shell cgroup:dir { mounton create_dir_perms };
-allow qti_init_shell cgroup:file { create_file_perms };
+allow qti_init_shell cgroup:file { rename setattr unlink rw_file_perms };

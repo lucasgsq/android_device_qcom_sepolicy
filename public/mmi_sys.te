@@ -27,5 +27,5 @@
 
 type mmi_sys, domain, coredomain;
 
-type mmi_sys_exec, exec_type, file_type;
+type mmi_sys_exec, exec_type, file_type, system_file_type;
 

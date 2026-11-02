@@ -14,7 +14,7 @@
 #allow dpmd dpmd_data_file:file create_file_perms;
 #allow dpmd dpmd_data_file:dir create_dir_perms;
 
-allow dpmd persist_dpm_prop:file r_file_perms;
+get_prop(dpmd, persist_dpm_prop)
 
 allow dpmd sysfs_wake_lock:file rw_file_perms;
 

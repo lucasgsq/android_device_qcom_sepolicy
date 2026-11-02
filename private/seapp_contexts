@@ -1,4 +1,6 @@
 #add new domain for DataServices
+# Installed Quark CNE package: retain system UID and application data type.
+user=system seinfo=platform name=com.quicinc.cne.CNEService domain=dataservice_app type=system_app_data_file
 user=system seinfo=platform name=.dataservices domain=dataservice_app type=system_app_data_file
 
 # AtFwd and FastDormancy apps

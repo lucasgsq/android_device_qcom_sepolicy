@@ -2,12 +2,12 @@
 /(vendor|system/vendor)/bin/perfd                                             u:object_r:perfd_exec:s0
 /data/system/perfd(/.*)?                                                      u:object_r:mpctl_data_file:s0
 /dev/socket/perfd                                                             u:object_r:mpctl_socket:s0
-/data/misc/perfd(/.*)?                                                        u:object_r:mpctl_socket:s0
+/data/misc/perfd(/.*)?                                                        u:object_r:quark_core_mpctl_socket:s0
 
 # Location
-/data/misc/location(/.*)?                                                     u:object_r:location_data_file:s0
-/data/misc/location/mq/location-mq-s                                          u:object_r:location_socket:s0
-/data/misc/location/mq/alarm_svc                                              u:object_r:location_socket:s0
+/data/misc/location(/.*)?                                                     u:object_r:quark_core_location_data_file:s0
+/data/misc/location/mq/location-mq-s                                          u:object_r:quark_core_location_socket:s0
+/data/misc/location/mq/alarm_svc                                              u:object_r:quark_core_location_socket:s0
 
 # IMS
 /(vendor|system/vendor)/bin/imscmservice                                      u:object_r:ims_exec:s0
@@ -76,7 +76,7 @@
 /sys/devices/mdp\.0/power/runtime_status                                      u:object_r:sysfs_runtime_status:s0
 
 # Old camera sockets
-/data/cam_socket[012]                                                         u:object_r:camera_socket:s0
+/data/cam_socket[012]                                                         u:object_r:quark_core_camera_socket:s0
 
 # Bluetooth
 /(vendor|system/vendor)/bin/hci_qcomm_init                                    u:object_r:bluetooth_loader_exec:s0
